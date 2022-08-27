@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Usuário</title>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+	$(function (){
+		$("#cidade").autocomplete({
+			source: "/usuarios/autocompleteCidades",
+			minLength: 2,
+			select: function (event, ui){
+				this.value = ui.item.label;
+				$("#idCidade").val(ui.item.value);
+				return false;
+			}
+		});
+	});
+	
+
+</script>
+
+</head>
+<body>
+	<section layout:fragment="corpo">
+		
+		<h1>Cadastro de Usuário</h1>
+		
+		<div th:replace="fragments/mensagens"></div>
+		
+		
+		<div id="form">
+		<form th:action="@{/usuarios/salvar}" th:object="${usuario}"
+		method="post" >
+		
+		<input type="hidden" th:field="${usuario.id}" />
+		
+			<div class="row">
+				<div class="col">
+					<input type="text" th:field="${usuario.nome}" class="form-control" placeholder="Nome" aria-label="First name" >
+				</div>
+				<div class="col">
+					<input type="text" th:field="${usuario.matricula}" class="form-control" placeholder="Matricula"
+						aria-label="Last name">
+				</div>
+				<div class="col">
+					<input type="password" th:field="${usuario.senha}" class="form-control" placeholder="Senha"
+						aria-label="Last name" >
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col">
+					<input type="email" th:field="${usuario.email}" class="form-control" placeholder="Email"
+						aria-label="First email" >
+				</div>
+				<div class="col">
+					<input type="text" th:field="${usuario.endereco}" class="form-control" placeholder="Endereço"
+						aria-label="Last name" >
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col">
+					<input type="text" th:field="${usuario.telefone}" class="form-control" placeholder="Telefone"
+						aria-label="First name" >	
+				</div>
+				<div class="row">
+					<div class="col"><br>
+					<input id="cidade" th:field="${usuario.cidade.nome}" class="form-control" aria-label="First name" placeholder="Cidade de Atuação" />
+				<input id="idCidade" type="hidden"  th:field="${usuario.cidade.id}" />
+				</div>
+				</div>
+			</div>
+			<br>
+			<button type="submit" class="btn btn-dark" th:value="${usuario.id} == 0 ? Cadastrar" >Cadastrar</button>
+			<button type="submit" class="btn btn-dark" value="Cancelar"
+						formaction="/menu" formmethod="get">Cancelar</button>
+			</form>
+			</div>
+			<br>
+		
+	</section>
+</body>
+</html>

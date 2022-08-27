@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Programar Tarefas</title>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+	$(function (){
+		$("#setor").autocomplete({
+			source: "/equipamentos/autocompleteSetores",
+			minLength: 2,
+			select: function (event, ui){
+				this.value = ui.item.label;
+				$("#idSetor").val(ui.item.value);
+				return false;
+			}
+		});
+	});
+	
+
+</script>
+
+</head>
+<body>
+	<section layout:fragment="corpo">
+		
+		<div id="cadastro">
+
+		<h1>Programar Tarefas</h1>
+		
+		
+		<br>
+		<div th:replace="fragments/mensagens"></div>
+		
+		<div id="form">
+			<form class="row g-3" th:action="@{/programar/salvar}" th:object="${programar}"
+		method="post">
+		
+				<div class="row">
+					<div class="col"><br>
+					<input id="setor" th:field="${programar.setor.nome}" class="form-control" aria-label="First name" placeholder="Setor" />
+				<input id="idSetor" type="hidden"  th:field="${programar.setor.id}" />
+				</div>
+				</div>
+				<div class="col-md-6">
+					<label for="inputAddress"  class="form-label" >Temperatura</label> <input
+						th:field="${programar.temperatura}"
+						type="text" class="form-control" id="inputAddress">
+				</div>
+				<div class="col-6">
+					<label for="inputAddress"  class="form-label">Horário</label> <input
+						th:field="${programar.hora}"
+						type="text" class="form-control" id="inputAddress"
+						placeholder="12:00hr">
+				</div>
+				<div class="col-md-4">
+					<label for="inputState"  class="form-label">Dia da Semana</label> <select
+						th:field="${programar.dia}"
+						id="inputState" class="form-select">
+						<option value="">Selecione</option>
+						<option th:each="d : ${dia}" 
+						th:text="${d}" th:value="${d}"></option>
+					</select>
+				</div>
+				<div class="col-12">
+					<button type="submit" class="btn btn-dark" th:value="${programar.id} == 0 ? Cadastrar" >Cadastrar</button>
+					<button type="submit" class="btn btn-dark" value="Cancelar"
+						formaction="/menu" formmethod="get">Cancelar</button>
+				</div>
+			</form>
+
+
+		</div>
+
+	</div>
+			<br>
+		
+	</section>
+</body>
+</html>
