@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<section layout:fragment="corpo">
+		
+		<h1>Menu</h1>
+			<br>
+		<div id="selecao" style="margin: 1em;">
+			<nav class="navbar navbar-dark bg-dark"
+				style="border-radius: 10px">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">Menu de opçoes do Sistema</a>
+					<button class="navbar-toggler" type="button"
+						data-bs-toggle="collapse" data-bs-target="#navbarText"
+						aria-controls="navbarText" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarText">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item"><a class="nav-link active"
+								aria-current="page" href="/usuarios/cadastro">Cadastrar Usuário</a></li>
+							<li class="nav-item"><a class="nav-link" href="/equipamentos/cadastro">Cadastrar
+									Equipamento</a></li>
+							<li class="nav-item"><a class="nav-link" href="/programar/programar">Programar
+									Tarefas</a></li>
+							<li class="nav-item"><a class="nav-link" href="/agendar/busca">Agendar
+									Tarefas</a></li>
+							<li class="nav-item"><a class="nav-link" href="/">Inicio
+									</a></li>		
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<br>
+		
+	</section>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<section layout:fragment="corpo">
+		
+		<h1>Login</h1>
+		<br>
+		<form id="form" method="post" th:action="@{/login}">
+		
+		<div th:replace="fragments/mensagens"></div>
+		
+		<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Matricula
+					</label> <input type="text" name="username" class="form-control"
+					id="exampleInputEmail1" aria-describedby="emailHelp" required autofocus />
+				
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Senha</label>
+				<input type="password" class="form-control" name="password"
+					id="exampleInputPassword1" required />
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="remenber-me"
+					id="flexCheckIndeterminate"> <label
+					class="form-check-label" for="flexCheckIndeterminate">
+					Lembrar-me </label>
+			</div>
+			<br>
+
+			<div class="d-grid gap-2 col-6 mx-auto">
+				
+				<a class="btn btn-dark" type="button" href="/menu">ENTRAR</a>
+			</div>
+			</form>
+			<br>
+		
+	</section>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Equipamentos</title>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- metodo do autocomplete -->
+<script>
+	$(function (){
+		$("#setor").autocomplete({
+			source: "/equipamentos/autocompleteSetores",
+			minLength: 2,
+			select: function (event, ui){
+				this.value = ui.item.label;
+				$("#idSetor").val(ui.item.value);
+				return false;
+			}
+		});
+	});
+	
+
+</script>
+
+</head>
+<body>
+	
+	<!-- Layout das paginas -->
+	<section layout:fragment="corpo">
+		
+		<div id="cadastro">
+
+		<h1>Cadastro Equipamento</h1>
+		
+		<br>
+		
+		<!-- mensagen das paginas -->
+		<div th:replace="fragments/mensagens"></div>
+		
+		<div id="form">
+		<form  th:action="@{/equipamentos/salvar}" th:object="${equipamento}"
+		method="post" >
+		
+			<div class="row">
+				<div class="col">
+					<input type="text"  th:field="${equipamento.marca}" class="form-control" placeholder="Marca"
+						aria-label="First name">
+				</div>
+				<div class="col">
+					<input type="text" th:field="${equipamento.potencia}" class="form-control" placeholder="Potência 9000 BTs"
+						aria-label="Last name">
+				</div>
+
+			</div>
+			<br>
+			<div class="row">
+				<div class="col">
+					<input type="text" th:field="${equipamento.ip}" class="form-control" placeholder="IP"
+						aria-label="First name">
+				</div>
+				<div class="col">
+					<input type="text" th:field="${equipamento.mac}" class="form-control" placeholder="Endereço Mac"
+						aria-label="Last name">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+					<div class="col"><br>
+					<input id="setor" th:field="${equipamento.setor.nome}" class="form-control" aria-label="First name" placeholder="Setor" />
+				<input id="idSetor" type="hidden"  th:field="${equipamento.setor.id}" />
+				</div>
+				</div>
+			<br>
+			<button type="submit" class="btn btn-dark" th:value="${equipamento.id} == 0 ? Cadastrar" >Cadastrar</button>
+			<button type="submit" class="btn btn-dark" value="Cancelar"
+						formaction="/menu" formmethod="get">Cancelar</button>
+		</form>	
+		</div>
+
+	</div>
+			<br>
+		
+	</section>
+</body>
+</html>

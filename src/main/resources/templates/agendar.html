@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Agendamento de Tarefas</title>
+
+<style type="text/css">
+
+table{
+margin: 2em;
+}
+
+</style>
+</head>
+<body>
+	
+	<!-- Layout das paginas -->
+	<section layout:fragment="corpo">
+	
+		<!-- formulario de busca -->
+		<form th:action="@{/agendar/buscar}" method="get" style="margin-right: 5em;"> 
+		
+		<label style="margin: 1em; font-size: 2em; font-family: serif;">Programações Cadastradas</label>
+		<p><button type="submit" class="btn btn-dark" value="Cancelar"
+						formaction="/menu" formmethod="get" style="margin-left: 2em;">Cancelar</button>
+		<!-- tabela que sera exibida de acordo com as programaçoes cadastradas -->					
+		<table class="table table-dark table-striped" th:if="${programacoesEncontradas} != null">
+		
+				<tr >
+						<th>Setor</th>
+						<th>Temperatura</th>	
+						<th>Horário</th>	
+						<th>Dia</th>
+						<th></th>
+						<th></th>									
+				</tr>
+				<tr th:each="p : ${programacoesEncontradas}">
+						
+						<td th:text="${p.setor.nome}"></td>
+						<td th:text="${p.temperatura}"></td>
+						<td th:text="${p.hora}"></td>
+						<td th:text="${p.dia}"></td>
+						<td>
+						<a th:href="'/programar/editar/' + ${p.id}">
+						Editar 
+						</a>
+						<a th:href="'/programar/remover/' + ${p.id}"
+							onclick="if (!confirm('Deseja realmente remover a programação?')) return false;">
+						Remover
+						</a>
+					</td>	
+						<td><input type="Button" style="width: 90; height: 10"
+							value="Ligar" > <input type="Button"
+							style="width: 90; height: 10" value="Desligar"></td>
+					
+					</tr>		
+		
+		</table>
+		</form>
+	</section>
+</body>
+</html>
